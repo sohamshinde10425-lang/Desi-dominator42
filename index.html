@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Desi Dominator Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+      background: #1e293b;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    a.button {
+      display: inline-block;
+      margin: 20px;
+      padding: 12px 20px;
+      background: red;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    canvas {
+      background: black;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>🔥 Desi Dominator Gaming Hub 🔥</header>
+
+<a class="button" href="https://www.youtube.com/@DesiDominator-h9j" target="_blank">
+  🎬 Visit My YouTube Channel
+</a>
+
+<h2>🎮 Play Mini Games</h2>
+
+<div class="games">
+
+  <!-- Click Game -->
+  <div class="card">
+    <h3>Click Speed Game</h3>
+    <p>Clicks: <span id="clicks">0</span></p>
+    <button onclick="clickGame()">Click Me!</button>
+  </div>
+
+  <!-- Guess Game -->
+  <div class="card">
+    <h3>Guess Number (1-10)</h3>
+    <input type="number" id="guessInput" min="1" max="10">
+    <button onclick="guessGame()">Guess</button>
+    <p id="guessResult"></p>
+  </div>
+
+  <!-- Simple Canvas Game -->
+  <div class="card">
+    <h3>Catch the Box</h3>
+    <canvas id="gameCanvas" width="200" height="200"></canvas>
+  </div>
+
+</div>
+
+<script>
+  // Click Game
+  let clicks = 0;
+  function clickGame() {
+    clicks++;
+    document.getElementById("clicks").innerText = clicks;
+  }
+
+  // Guess Game
+  function guessGame() {
+    let user = document.getElementById("guessInput").value;
+    let random = Math.floor(Math.random() * 10) + 1;
+    let result = document.getElementById("guessResult");
+
+    if (user == random) {
+      result.innerText = "🎉 Correct!";
+    } else {
+      result.innerText = "❌ Wrong! Number was " + random;
+    }
+  }
+
+  // Canvas Game
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+
+  let x = Math.random() * 180;
+  let y = Math.random() * 180;
+
+  function drawBox() {
+    ctx.clearRect(0, 0, 200, 200);
+    ctx.fillStyle = "lime";
+    ctx.fillRect(x, y, 20, 20);
+  }
+
+  canvas.addEventListener("click", function(e) {
+    let rect = canvas.getBoundingClientRect();
+    let mx = e.clientX - rect.left;
+    let my = e.clientY - rect.top;
+
+    if (mx > x && mx < x + 20 && my > y && my < y + 20) {
+      alert("🎯 Hit!");
+      x = Math.random() * 180;
+      y = Math.random() * 180;
+    }
+    drawBox();
+  });
+
+  drawBox();
+</script>
+
+</body>
+</html>
